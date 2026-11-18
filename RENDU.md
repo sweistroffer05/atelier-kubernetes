@@ -33,9 +33,9 @@ Dans k3d, un nœud Kubernetes est concrètement un conteneur Docker exécutant K
 ## Exercice 4 — Déclaratif
 
 7. Quelle différence entre `kubectl create` et `kubectl apply` ?
-   >
+   >kubectl create est une commande impérative qui permet de créer directement une ressource Kubernetes en indiquant ses paramètres dans la commande.kubectl apply utilise une approche déclarative : on décrit l'état souhaité dans des fichiers YAML et Kubernetes crée ou met à jour les ressources pour correspondre à cette configuration.L'approche déclarative est particulièrement adaptée à la production, car les fichiers YAML peuvent être versionnés avec Git et réutilisés facilement.
 8. À quoi sert le `selector` d'un Service ? Que se passe-t-il s'il ne correspond à aucun pod ?
-   >
+   >Le selector d'un Service permet d'identifier les Pods auxquels il doit transmettre le trafic grâce à leurs labels. Dans notre cas, le selector app: site permet au Service de retrouver les Pods possédant ce même label. Si aucun Pod ne correspond au selector, le Service existe toujours mais ne possède aucun endpoint. Il ne peut donc transmettre le trafic à aucune application.
 
 ## Exercice 5 — Scaling & mises à jour
 
