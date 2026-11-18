@@ -1,0 +1,31 @@
+# Exercice 4 — Le Deployment de votre site.
+# Remplacez chaque , puis : kubectl apply -f k8s/site/
+# Aide : kubectl explain deployment.spec.template.spec.containers
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: site
+  labels:
+    app: site
+spec:
+  replicas: 3                      # Exercice 5 : vous changerez cette valeur
+  selector:
+    matchLabels:
+      app: site                    # doit correspondre aux labels du template ci-dessous
+  template:
+    metadata:
+      labels:
+        app: site
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.28              # utilisez nginx:1.27 (version précise, pas "latest")
+          ports:
+            - containerPort: 80  # le port sur lequel nginx écoute
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html      # le dossier servi par nginx (cf. exercice 3)
+      volumes:
+        - name: html
+          configMap:
+            name: site-html             # le nom de la ConfigMap de configmap.yaml

@@ -73,8 +73,15 @@ site-7468f5cd4f-hqs28   1/1     Running             0          5s      10.42.0.8
 ## Bonus (facultatif)
 
 14. Bonus réalisés et remarques :
-    >
+    >Bonus A — Ingress
+Oui, le site reste accessible après la suppression des Pods. Traefik redirige les requêtes vers le Service Kubernetes, qui les transmet aux Pods disponibles. Le Deployment recrée automatiquement les Pods supprimés.
+
+Bonus B — Probes et ressources
+Avec /nope, Nginx renvoie une erreur HTTP 404. La readinessProbe échoue : le Pod reste Running, mais passe en 0/1 Ready et n'est plus utilisé par le Service. Le conteneur n'est pas redémarré.
+
+Bonus C — Maintenance d'un nœud
+Après le drain de k3d-lab-agent-0, les Pods applicatifs ont été déplacés vers les autres nœuds disponibles (k3d-lab-agent-1 et k3d-lab-server-0). Après le uncordon, les anciens Pods ne reviennent pas automatiquement sur le nœud : Kubernetes autorise simplement de nouvelles affectations sur celui-ci.
 
 ---
 
-**Score obtenu avec `./scripts/check.sh` :** ... / ...
+**Score obtenu avec `./scripts/check.sh` :** 18 / 18
