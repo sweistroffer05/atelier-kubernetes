@@ -66,9 +66,9 @@ site-7468f5cd4f-hqs28   1/1     Running             0          5s      10.42.0.8
 ## Exercice 6 — Portainer & Mario
 
 12. URL publique de votre Mario :
-    >
+    >https://curly-halibut-54x5pgxxvpqfq7-8585.app.github.dev
 13. Retrouvez le Deployment `mario` en ligne de commande. Portainer et `kubectl` parlent-ils au même composant ? Lequel ?
-    >
+    >Oui, Portainer et kubectl communiquent avec le même cluster Kubernetes. Le Deployment mario, créé depuis Portainer, est visible avec kubectl get deploy mario -o yaml. Les labels io.portainer.kubernetes.application.* confirment son lien avec Portainer.
 
 ## Bonus (facultatif)
 
