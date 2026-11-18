@@ -19,9 +19,9 @@ Dans k3d, un nœud Kubernetes est concrètement un conteneur Docker exécutant K
 ## Exercice 2 — Premier déploiement
 
 3. Quels objets Kubernetes ont été créés par `kubectl create deployment` ? (indice : `kubectl get all`)
-   >
+   >La commande kubectl create deployment web --image=nginx a créé un Deployment nommé web, qui a ensuite entraîné la création d'un ReplicaSet et d'un Pod contenant le conteneur Nginx.La commande kubectl expose deployment web --port=80 a également créé un Service de type ClusterIP permettant d'exposer l'application sur le port 80 à l'intérieur du cluster.
 4. Vous avez supprimé le pod `web-...` : que s'est-il passé, et pourquoi ?
-   >
+   >Après la suppression du Pod, Kubernetes a automatiquement créé un nouveau Pod avec un nom différent (web-68d995574f-mjgfq). Cela s'explique par le fonctionnement du ReplicaSet, qui surveille en permanence le nombre de Pods disponibles et veille à maintenir le nombre de réplicas souhaité par le Deployment. Comme un seul Pod était demandé, Kubernetes en a automatiquement recréé un pour maintenir cet état.
 
 ## Exercice 3 — Modifier un conteneur en direct
 
