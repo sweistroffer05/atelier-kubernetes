@@ -41,12 +41,27 @@ Dans k3d, un nœud Kubernetes est concrètement un conteneur Docker exécutant K
 
 9. Sur quels nœuds se trouvent vos 3 réplicas ? Collez la sortie de `kubectl get pods -l app=site -o wide`.
    ```
-
+@sweistroffer05 ➜ /workspaces/atelier-kubernetes (main) $ kubectl get pods -o wide -w
+NAME                    READY   STATUS    RESTARTS   AGE     IP          NODE               NOMINATED NODE   READINESS GATES
+site-7b6d9fff54-5v6vl   1/1     Running   0          6m47s   10.42.1.6   k3d-lab-server-0   <none>           <none>
+web-68d995574f-5dhd4    1/1     Running   0          22m     10.42.2.6   k3d-lab-agent-0    <none>           <none>
+site-7b6d9fff54-46sss   0/1     Pending   0          0s      <none>      <none>             <none>           <none>
+site-7b6d9fff54-n4n6t   0/1     Pending   0          0s      <none>      <none>             <none>           <none>
+site-7b6d9fff54-46sss   0/1     Pending   0          0s      <none>      k3d-lab-agent-1    <none>           <none>
+site-7b6d9fff54-n4n6t   0/1     Pending   0          0s      <none>      k3d-lab-agent-0    <none>           <none>
+site-7b6d9fff54-46sss   0/1     ContainerCreating   0          0s      <none>      k3d-lab-agent-1    <none>           <none>
+site-7b6d9fff54-n4n6t   0/1     ContainerCreating   0          0s      <none>      k3d-lab-agent-0    <none>           <none>
+site-7b6d9fff54-46sss   1/1     Running             0          1s      10.42.0.7   k3d-lab-agent-1    <none>           <none>
+site-7b6d9fff54-n4n6t   1/1     Running             0          7s      10.42.2.7   k3d-lab-agent-0    <none>           <none>
+site-7468f5cd4f-hqs28   0/1     Pending             0          0s      <none>      <none>             <none>           <none>
+site-7468f5cd4f-hqs28   0/1     Pending             0          0s      <none>      k3d-lab-agent-1    <none>           <none>
+site-7468f5cd4f-hqs28   0/1     ContainerCreating   0          0s      <none>      k3d-lab-agent-1    <none>           <none>
+site-7468f5cd4f-hqs28   1/1     Running             0          5s      10.42.0.8   k3d-lab-agent-1    <none>           <none>
    ```
 10. Avec l'image `nginx:9.99`, quel statut avait le pod ? Quelle commande vous a donné la cause ?
-    >
+    >Le nouveau Pod avait le statut ErrImagePull, puis ImagePullBackOff. La commande kubectl describe pod  m'a permis d'identifier la cause dans la section Events : l'image nginx:9.99 est introuvable sur Docker Hub (not found). Kubernetes ne peut donc pas la télécharger.  
 11. Pendant la panne, le site restait-il accessible ? Pourquoi ?
-    >
+    >Oui, le site est resté accessible pendant la panne. Kubernetes a conservé les anciens Pods fonctionnels puisque le nouveau Pod n'était pas prêt. Le Service a continué à distribuer le trafic vers les anciens Pods, assurant ainsi la continuité du service.
 
 ## Exercice 6 — Portainer & Mario
 
