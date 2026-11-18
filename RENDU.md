@@ -26,9 +26,9 @@ Dans k3d, un nœud Kubernetes est concrètement un conteneur Docker exécutant K
 ## Exercice 3 — Modifier un conteneur en direct
 
 5. Après suppression du pod, votre message « Bienvenue... » a-t-il survécu ? Pourquoi ?
-   >
+   >Non, le message « Bienvenue sur mon site Web » n'a pas survécu à la suppression du Pod. La modification avait été effectuée directement dans le système de fichiers du conteneur et n'était pas persistante. Lors de la suppression du Pod, Kubernetes en a créé un nouveau à partir de l'image Nginx originale. Le nouveau conteneur ne contenait donc pas les modifications effectuées précédemment.
 6. Pourquoi le `port-forward` a-t-il cessé de fonctionner après la suppression du pod ?
-   >
+   >Le port-forward a cessé de fonctionner parce qu'il était connecté à l'ancien Pod. Lorsque celui-ci a été supprimé, son environnement d'exécution a également disparu, ce qui a entraîné la perte de connexion. Kubernetes a bien recréé un nouveau Pod, mais le port-forward ne se reconnecte pas automatiquement à ce dernier. Il faut donc relancer la commande kubectl port-forward pour établir un nouveau tunnel.
 
 ## Exercice 4 — Déclaratif
 
