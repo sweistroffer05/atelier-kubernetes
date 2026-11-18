@@ -2,17 +2,19 @@
 
 > Complétez ce fichier au fil de l'atelier, puis faites un commit et un push (voir la section « Rendu » du README).
 
-**Nom / Prénom :**
-**Groupe :**
+**Nom / Prénom :** Weistroffer Samuel
+**Groupe :** RS2
 
 ---
 
 ## Exercice 1 — Cluster
 
 1. Combien de nœuds affiche `kubectl get nodes` ? Quel est le rôle de chacun ?
-   >
+   >Le cluster affiche 3 nœuds : un Control Plane (k3d-lab-server-0) et deux Workers (k3d-lab-agent-0 et k3d-lab-agent-1). Les trois nœuds sont dans l'état Ready, ce qui signifie qu'ils sont opérationnels et peuvent participer au fonctionnement du cluster.
 2. Que montre `docker ps` ? Qu'est-ce qu'un « nœud » dans k3d, concrètement ?
-   >
+   >La commande docker ps affiche les conteneurs Docker utilisés pour faire fonctionner le cluster k3d. On retrouve un conteneur pour le Control Plane, deux conteneurs pour les Workers et un conteneur supplémentaire pour le Load Balancer.
+
+Dans k3d, un nœud Kubernetes est concrètement un conteneur Docker exécutant K3s. Chaque conteneur joue un rôle précis dans le cluster et permet de simuler une infrastructure Kubernetes composée de plusieurs machines.
 
 ## Exercice 2 — Premier déploiement
 
