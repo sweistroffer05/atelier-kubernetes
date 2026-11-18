@@ -84,4 +84,4 @@ Après le drain de k3d-lab-agent-0, les Pods applicatifs ont été déplacés ve
 
 ---
 
-**Score obtenu avec `./scripts/check.sh` :** 18 / 18
+**Score obtenu avec `./scripts/check.sh` :**  18 / 18
